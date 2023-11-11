@@ -1,26 +1,27 @@
-import { CfnOutput, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib'
+import { CfnOutput, RemovalPolicy } from 'aws-cdk-lib'
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb'
 import { Construct } from 'constructs'
 
-interface DatabaseStackProps extends StackProps {}
+interface DatabaseStackProps {}
 
-export class DatabaseStack extends Stack {
+export class DatabaseConstruct extends Construct {
   public readonly ordersTable: dynamodb.Table
+
   constructor(scope: Construct, id: string, props?: DatabaseStackProps) {
-    super(scope, id, props)
+    super(scope, id)
 
     /// Deberia crear la DB y los consumers de la queue
 
-    const table = new dynamodb.Table(this, 'orders-table', {
+    const table = new dynamodb.Table(this, 'orders-table-v2', {
       partitionKey: { name: 'orderId', type: dynamodb.AttributeType.STRING },
       billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
       removalPolicy: RemovalPolicy.DESTROY,
-      tableName: 'orders-table',
+      tableName: 'orders-table-v2',
     })
 
     this.ordersTable = table
 
-    new CfnOutput(this, 'orders-table-name', {
+    new CfnOutput(this, 'orders-table-name-v2', {
       value: table.tableName,
     })
   }

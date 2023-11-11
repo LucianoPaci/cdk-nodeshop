@@ -11,9 +11,9 @@ import * as apigw from 'aws-cdk-lib/aws-apigateway'
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs'
 import path = require('path')
 import { Queue, DeadLetterQueue } from 'aws-cdk-lib/aws-sqs'
-import { DatabaseStack } from './stacks/DatabaseStack'
 import { SqsEventSource } from 'aws-cdk-lib/aws-lambda-event-sources'
 import { Role, ServicePrincipal } from 'aws-cdk-lib/aws-iam'
+import { DatabaseConstruct } from './constructs/Database'
 
 export class CdkNodeshopStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -45,7 +45,7 @@ export class CdkNodeshopStack extends Stack {
     //   queueName: 'orders-dlq'
     // })
 
-    const dbStack = new DatabaseStack(this, 'database-stack', {})
+    const dbStack = new DatabaseConstruct(this, 'database-stack', {})
 
     const queue = new Queue(this, 'orders-queue', {
       visibilityTimeout: Duration.seconds(300),
