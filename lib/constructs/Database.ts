@@ -9,6 +9,7 @@ export class DatabaseConstruct extends Construct {
 
   constructor(scope: Construct, id: string, props?: DatabaseStackProps) {
     super(scope, id)
+    const pro = props
 
     /// Deberia crear la DB y los consumers de la queue
 

@@ -2,11 +2,11 @@
   "name": "cdk-nodeshop",
   "version": "0.1.0",
   "bin": {
-    "cdk-nodeshop": "bin/cdk-nodeshop.js"
+    "cdk-nodeshop": "bin/cdk-nodeshop.ts"
   },
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w",
+    "build": "tsc --noEmit",
+    "watch": "tsc -w --noEmit",
     "test": "jest",
     "cdk": "cdk",
     "watch:me": "cdk watch --require-approval never"
