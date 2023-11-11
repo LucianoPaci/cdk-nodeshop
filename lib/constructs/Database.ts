@@ -12,16 +12,16 @@ export class DatabaseConstruct extends Construct {
 
     /// Deberia crear la DB y los consumers de la queue
 
-    const table = new dynamodb.Table(this, 'orders-table-v2', {
+    const table = new dynamodb.Table(this, 'orders-table', {
       partitionKey: { name: 'orderId', type: dynamodb.AttributeType.STRING },
       billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
       removalPolicy: RemovalPolicy.DESTROY,
-      tableName: 'orders-table-v2',
+      tableName: 'orders-table',
     })
 
     this.ordersTable = table
 
-    new CfnOutput(this, 'orders-table-name-v2', {
+    new CfnOutput(this, 'orders-table-name', {
       value: table.tableName,
     })
   }
